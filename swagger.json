@@ -1,0 +1,87 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "Creacion de clientes Mambu",
+      "description": "Esta api sirve para generar un cliente en mambu",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "paths":{
+        "/create":{
+            "post":{
+                "tags": ["Users"],
+                "summary": "Creacion de cliente en Mambu",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Request para crear usuario en mambu",
+                        "schema": {
+                          "$ref": "#/definitions/User"
+                        }
+                      }
+                  ],
+                "produces": ["application/json"],
+                "responses":{
+                    "201":{
+                        "description": "Se ha realizado correctamente la operación"
+                    },
+                    "500":{
+                        "description":"Todos los errores durante el proceso mandaron codigo 500. La forma de direfenciarlos sera con el statusCode y la descripcion del error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+          "required": ["idClienteFinanciera", 
+                        "primerNombre",
+                        "apellidoPaterno",
+                        "apellidoMaterno",
+                        "telefono",
+                        "correo",
+                        "idCentroBeneficio"],
+          "properties": {
+            "idClienteFinanciera": {
+              "type": "integer"
+            },
+            "primerNombre": {
+              "type": "string"
+            },
+            "segundoNombre": {
+              "type": "string"
+            },
+            "apellidoPaterno":{
+                "type":"string"
+            },
+            "apellidoMaterno":{
+                "type":"string"
+            },
+            "telefono":{
+                "type":"integer"
+            },
+            "correo":{
+                "type":"string"
+            },
+            "idCentroBeneficio":{
+                "type":"integer"
+            }
+          }
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": ["http/https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"]
+  }

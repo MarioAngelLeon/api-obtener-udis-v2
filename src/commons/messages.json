@@ -1,0 +1,48 @@
+[  
+    {
+      "id": "MAMBU.001",
+      "template": "- <%= message %>",
+      "description": "Error en el centro de beneficios"
+    },
+    {
+      "id": "MAMBU.002",
+      "template": "- <%= message %>",
+      "description": "Error al crear al cliente"
+    },
+    {
+      "id": "NMP.100",
+      "template": "- <%= message %>",
+      "description": "Error al insertar cliente en bd"
+    },
+    {
+      "id": "NMP.200",
+      "template": "SUCCESS",
+      "description": "Se ha realizado correctamente la operación"
+    },
+    
+    {
+      "id": "NMP.201",
+      "template": "CREATED",
+      "description": "Se ha realizado correctamente la operación"
+    },
+    {
+      "id": "NMP.204",
+      "template": "NO CONTENT",
+      "description": "Se ha realizado correctamente la operación"
+    },
+    {
+      "id": "NMP.500",
+      "template": "Internal Server Error - <%= message %>",
+      "description": "Error en el servidor"
+    },
+    {
+      "id": "NMP.400",
+      "template": "solicitud malformada - <%= message %>",
+      "description": "Error en el servidor"
+    },
+    {
+      "id": "NMP.409",
+      "template": "Conflict - <%= message %>",
+      "description": "Ha ocurrido un conflicto de datos"
+    }
+]
