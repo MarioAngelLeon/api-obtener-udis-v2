@@ -2,7 +2,7 @@
     {
       "id": "MAMBU.001",
       "template": "- <%= message %>",
-      "description": "Error al generar o leer los Ids de crédito"
+      "description": "Error obtener los valores de las UDIs"
     },
     {
       "id": "MAMBU.002",

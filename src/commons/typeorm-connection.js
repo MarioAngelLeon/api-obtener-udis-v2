@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { CreditIdEntity } from "../models/credit-id.entity";
+import { UdiEntity } from "../models/udi.entity";
 import {
   DB_DATABASE,
   DB_HOST,
@@ -18,5 +18,5 @@ export const DBConnection = new DataSource({
   password: DB_PASS,
   database: DB_DATABASE,
   synchronize: (DB_SYNC || "").toUpperCase() === "TRUE",
-  entities: [CreditIdEntity],
+  entities: [UdiEntity],
 });

@@ -43,9 +43,14 @@ module.exports = (res, e) => {
 
   return Response.createResponse(res, code, {
     statusCode,
-    message: compiled(
-      mergeVariables && mergeVariables.message ? mergeVariables : { message }
-    ),
+    message:
+      typeof message == "object"
+        ? message
+        : compiled(
+            mergeVariables && mergeVariables.message
+              ? mergeVariables
+              : { message }
+          ),
     description,
   });
 };

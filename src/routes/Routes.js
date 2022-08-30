@@ -1,9 +1,8 @@
 import express from "express";
-import { CreateCreditIdController } from "../controller/create-credit-id.controller";
+import { GetUdisControllerController } from "../controller/get-udi.controller";
 
 const routes = express.Router();
 
-routes.get("/credit/:productNumber", CreateCreditIdController.readCreditId);
-routes.post("/credit/:productNumber", CreateCreditIdController.takeCreditId);
+routes.get("/udis/:date", GetUdisControllerController.getUdis);
 
 module.exports = routes;

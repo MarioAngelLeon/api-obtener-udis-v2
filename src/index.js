@@ -6,7 +6,6 @@ import routes from "./routes/Routes";
 //import LOG from './commons/logger'
 import cfenv from "cfenv";
 import { DBConnection } from "./commons/typeorm-connection";
-import { CreateCreditIdController } from "./controller/create-credit-id.controller";
 
 const appEnv = cfenv.getAppEnv();
 
@@ -31,8 +30,6 @@ app.listen(GLOB.PORT, appEnv.bind, async () => {
   try {
     await DBConnection.initialize();
     console.log("******* DB ONLINE **********");
-    console.log("loading data ...");
-    await CreateCreditIdController.loadInitialData();
     console.log(`Listening at port ${GLOB.PORT}`);
   } catch (error) {
     console.log("An error ocurred:", error.message || error);

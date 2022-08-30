@@ -9,101 +9,71 @@
     }
   },
   "schemes": ["http"],
-  "host": "localhost:3000",
+  "host": "localhost:3001",
   "basePath": "/api/v1",
   "paths": {
-    "/credit/{productNumber}": {
+    "/udis/{date}": {
       "get": {
-        "tags": ["Credit-id"],
-        "summary": "get last one available credit id",
-        "description": "Method to get last one available credit id by product numeber.",
+        "tags": ["Udi"],
+        "summary": "get one udi from BD",
+        "description": "Method to get one udi by date",
         "produces": ["application/json"],
         "parameters": [
           {
             "in": "path",
-            "name": "productNumber",
-            "description": "Product number must be: 304, 900, 310, 305, 601, 602",
+            "name": "date",
+            "description": "Date to search",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "304"
+              "example": "2022/08/26"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/getCreditId"
-              }
-            }
+            "schema": { "$ref": "#/definitions/getUdi" }
+          },
+          "400": {
+            "description": "Udi bad request",
+            "schema": { "$ref": "#/definitions/notValidDate" }
           },
           "404": {
-            "description": "Product number does not found",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/creditIdNotFound"
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Credit-id"],
-        "summary": "take last one available credit id",
-        "description": "Method to take last one available credit id by product numeber.",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "productNumber",
-            "description": "Product number must be: 304, 900, 310, 305, 601, 602",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "304"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/takeCreditId"
-              }
-            }
-          },
-          "404": {
-            "description": "Product number does not found",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/creditIdNotFound"
-              }
-            }
+            "description": "Udi not found",
+            "schema": { "$ref": "#/definitions/udiNotFound" }
           }
         }
       }
     }
   },
   "definitions": {
-    "getCreditId": {
+    "getUdi": {
       "type": "object",
       "properties": {
-        "msg": { "type": "string", "example": "Id read" },
-        "product_number": { "type": "number", "example": 304 },
-        "credit_id": { "type": "number", "example": 1700000001 },
-        "description": { "type": "string", "example": "Crédito Personal" },
+        "msg": {
+          "type": "string",
+          "example": "Udi por fecha encontrada exitosamente"
+        },
+        "fecha": {
+          "type": "string",
+          "example": "26/08/2022"
+        },
+        "dato": {
+          "type": "string",
+          "example": "7.465516"
+        },
         "info": {
           "type": "object",
           "properties": {
-            "code": { "type": "string", "example": "NMP.201" },
-            "status": { "type": "string", "example": "CREATED" },
+            "code": {
+              "type": "string",
+              "example": "NMP.201"
+            },
+            "status": {
+              "type": "string",
+              "example": "CREATED"
+            },
             "message": {
               "type": "string",
               "example": "Se ha realizado correctamente la operación"
@@ -112,37 +82,46 @@
         }
       }
     },
-    "takeCreditId": {
+    "notValidDate": {
       "type": "object",
       "properties": {
-        "msg": { "type": "string", "example": "Id taked" },
-        "product_number": { "type": "number", "example": 304 },
-        "credit_id": { "type": "number", "example": 1700000001 },
-        "description": { "type": "string", "example": "Crédito Personal" },
-        "info": {
-          "type": "object",
-          "properties": {
-            "code": { "type": "string", "example": "NMP.201" },
-            "status": { "type": "string", "example": "CREATED" },
-            "message": {
-              "type": "string",
-              "example": "Se ha realizado correctamente la operación"
-            }
-          }
-        }
-      }
-    },
-    "creditIdNotFound": {
-      "type": "object",
-      "properties": {
-        "statusCode": { "type": "string", "example": "MAMBU.001" },
+        "statusCode": {
+          "type": "string",
+          "example": "NMP.400"
+        },
         "message": {
           "type": "string",
-          "example": "- Credit Id does not found"
+          "example": "solicitud malformada - El campo date does not match pattern \"/^\\\\d{4}([\\\\-/.])(0?[1-9]|1[1-2])\\\\1(3[01]|[12][0-9]|0?[1-9])$/\" "
         },
         "description": {
           "type": "string",
-          "example": "Error al generar o leer los Ids de crédito"
+          "example": "Error en el servidor"
+        }
+      }
+    },
+    "udiNotFound": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "example": "MAMBU.001"
+        },
+        "message": {
+          "type": "object",
+          "properties": {
+            "msg": {
+              "type": "string",
+              "example": "No se encontro el valor para la fecha solicitada"
+            },
+            "date": {
+              "type": "string",
+              "example": "09/07/2022"
+            }
+          }
+        },
+        "description": {
+          "type": "string",
+          "example": "Error obtener los valores de las UDIs"
         }
       }
     }
