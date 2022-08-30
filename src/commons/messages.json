@@ -2,7 +2,7 @@
     {
       "id": "MAMBU.001",
       "template": "- <%= message %>",
-      "description": "Error en el centro de beneficios"
+      "description": "Error al generar o leer los Ids de crédito"
     },
     {
       "id": "MAMBU.002",

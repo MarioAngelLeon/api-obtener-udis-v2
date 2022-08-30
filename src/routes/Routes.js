@@ -1,8 +1,9 @@
 import express from "express";
-import {createClientController} from '../controller/create.controller'
+import { CreateCreditIdController } from "../controller/create-credit-id.controller";
 
-const routes = express.Router()
+const routes = express.Router();
 
-routes.post('/create' , createClientController.createClient)
+routes.get("/credit/:productNumber", CreateCreditIdController.readCreditId);
+routes.post("/credit/:productNumber", CreateCreditIdController.takeCreditId);
 
-module.exports = routes
+module.exports = routes;

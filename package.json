@@ -47,6 +47,7 @@
     "newrelic": "^8.5.0",
     "sonarqube-scanner": "^2.8.1",
     "swagger-ui-express": "^4.5.0",
+    "typeorm": "^0.3.9",
     "uuid": "^3.4.0",
     "winston": "^3.3.3",
     "xml-js": "^1.6.11"

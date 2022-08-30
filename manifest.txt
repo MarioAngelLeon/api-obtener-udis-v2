@@ -1,0 +1,19 @@
+PORT=3000
+export CONTEXT_NAME=api-creacion-clientes
+export VERSION=v1
+export HTTP_REQUEST_REJECT_UNAUTHORIZED=false
+export HTTP_REQUEST_TIMEOUT=10000
+export DOMAIN_MAMBU=https://m775p.sandbox.mambu.com
+export BASIC_MAMBU=TWxlb246RGljaTNtYnIzMjAyMQ==
+export SONAR_HOST_URL=http://localhost:9000
+export SONAR_PROJECT_KEY=123456789a
+export SONAR_PROJECT_NAME=clientes
+export SONAR_PROJECT_LOGIN=squ_c736904a83cfabca9bd1408a2268f4177eb1310a
+
+export DB_TYPE=mysql
+export DB_HOST=localhost
+export DB_PORT=3306
+export DB_USER=root
+export DB_PASS=Chemaesmipastor.1
+export DB_DATABASE=mangosta2
+export DB_SYNC=true

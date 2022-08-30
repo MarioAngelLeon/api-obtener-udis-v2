@@ -1,87 +1,150 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0", 
-      "title": "Creacion de clientes Mambu",
-      "description": "Esta api sirve para generar un cliente en mambu",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-      }
-    },
-    "paths":{
-        "/create":{
-            "post":{
-                "tags": ["Users"],
-                "summary": "Creacion de cliente en Mambu",
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "description": "Request para crear usuario en mambu",
-                        "schema": {
-                          "$ref": "#/definitions/User"
-                        }
-                      }
-                  ],
-                "produces": ["application/json"],
-                "responses":{
-                    "201":{
-                        "description": "Se ha realizado correctamente la operación"
-                    },
-                    "500":{
-                        "description":"Todos los errores durante el proceso mandaron codigo 500. La forma de direfenciarlos sera con el statusCode y la descripcion del error"
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "description": "This is an api to get udis from banxico",
+    "version": "1.0.0",
+    "title": "UDIs get API",
+    "contact": {
+      "email": "j.hernandez@softtek.com"
+    }
+  },
+  "schemes": ["http"],
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "paths": {
+    "/credit/{productNumber}": {
+      "get": {
+        "tags": ["Credit-id"],
+        "summary": "get last one available credit id",
+        "description": "Method to get last one available credit id by product numeber.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productNumber",
+            "description": "Product number must be: 304, 900, 310, 305, 601, 602",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "304"
             }
-        }
-    },
-    "definitions": {
-        "User": {
-          "required": ["idClienteFinanciera", 
-                        "primerNombre",
-                        "apellidoPaterno",
-                        "apellidoMaterno",
-                        "telefono",
-                        "correo",
-                        "idCentroBeneficio"],
-          "properties": {
-            "idClienteFinanciera": {
-              "type": "integer"
-            },
-            "primerNombre": {
-              "type": "string"
-            },
-            "segundoNombre": {
-              "type": "string"
-            },
-            "apellidoPaterno":{
-                "type":"string"
-            },
-            "apellidoMaterno":{
-                "type":"string"
-            },
-            "telefono":{
-                "type":"integer"
-            },
-            "correo":{
-                "type":"string"
-            },
-            "idCentroBeneficio":{
-                "type":"integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/getCreditId"
+              }
+            }
+          },
+          "404": {
+            "description": "Product number does not found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/creditIdNotFound"
+              }
             }
           }
         }
-    },
-    "host": "localhost:8000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "Users",
-        "description": "API for users in the system"
+      },
+      "post": {
+        "tags": ["Credit-id"],
+        "summary": "take last one available credit id",
+        "description": "Method to take last one available credit id by product numeber.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productNumber",
+            "description": "Product number must be: 304, 900, 310, 305, 601, 602",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "304"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/takeCreditId"
+              }
+            }
+          },
+          "404": {
+            "description": "Product number does not found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/creditIdNotFound"
+              }
+            }
+          }
+        }
       }
-    ],
-    "schemes": ["http/https"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"]
+    }
+  },
+  "definitions": {
+    "getCreditId": {
+      "type": "object",
+      "properties": {
+        "msg": { "type": "string", "example": "Id read" },
+        "product_number": { "type": "number", "example": 304 },
+        "credit_id": { "type": "number", "example": 1700000001 },
+        "description": { "type": "string", "example": "Crédito Personal" },
+        "info": {
+          "type": "object",
+          "properties": {
+            "code": { "type": "string", "example": "NMP.201" },
+            "status": { "type": "string", "example": "CREATED" },
+            "message": {
+              "type": "string",
+              "example": "Se ha realizado correctamente la operación"
+            }
+          }
+        }
+      }
+    },
+    "takeCreditId": {
+      "type": "object",
+      "properties": {
+        "msg": { "type": "string", "example": "Id taked" },
+        "product_number": { "type": "number", "example": 304 },
+        "credit_id": { "type": "number", "example": 1700000001 },
+        "description": { "type": "string", "example": "Crédito Personal" },
+        "info": {
+          "type": "object",
+          "properties": {
+            "code": { "type": "string", "example": "NMP.201" },
+            "status": { "type": "string", "example": "CREATED" },
+            "message": {
+              "type": "string",
+              "example": "Se ha realizado correctamente la operación"
+            }
+          }
+        }
+      }
+    },
+    "creditIdNotFound": {
+      "type": "object",
+      "properties": {
+        "statusCode": { "type": "string", "example": "MAMBU.001" },
+        "message": {
+          "type": "string",
+          "example": "- Credit Id does not found"
+        },
+        "description": {
+          "type": "string",
+          "example": "Error al generar o leer los Ids de crédito"
+        }
+      }
+    }
   }
+}
